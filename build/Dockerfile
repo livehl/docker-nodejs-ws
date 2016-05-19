@@ -18,6 +18,6 @@ RUN /usr/bin/npm install node-static
  
 EXPOSE 8080
 EXPOSE 80
- 
+COPY app  /root
 ENTRYPOINT ["/usr/bin/node", "/root/server.js"]
 
