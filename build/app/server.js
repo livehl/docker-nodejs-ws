@@ -1,10 +1,16 @@
 var WebSocketServer = require('websocket').server;
 var http = require('http');
 
+var static = require('node-static');
+ 
+var fileServer = new static.Server('/root');
+
 var server = http.createServer(function(request, response) {
     console.log((new Date()) + ' Received request for ' + request.url);
-    response.writeHead(404);
-    response.end();
+    request.addListener('end', function () 
+    {
+        fileServer.serve(request, response);
+    }).resume();
 });
 server.listen(8080, function() {
     console.log((new Date()) + ' Server is listening on port 8080');
