@@ -11,6 +11,9 @@ var webSocketsServerPort = 8080;
 var webSocketServer = require('websocket').server;
 var http = require('http');
 
+var static = require('node-static');
+ 
+var fileServer = new static.Server('/root');
 /**
  * Global variables
  */
@@ -36,6 +39,11 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
  * HTTP server
  */
 var server = http.createServer(function(request, response) {
+    console.log((new Date()) + ' Received request for ' + request.url);
+    request.addListener('end', function () 
+    {
+        fileServer.serve(request, response);
+    }).resume();
     // Not important for us. We're writing WebSocket server, not HTTP server
 });
 server.listen(webSocketsServerPort, function() {
