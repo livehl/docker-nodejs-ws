@@ -1,5 +1,4 @@
 // http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/
-"use strict";
 
 // Optional. You will see this name in eg. 'ps' or 'top' command
 process.title = 'node-chat';
@@ -11,9 +10,9 @@ var webSocketsServerPort = 8080;
 var webSocketServer = require('websocket').server;
 var http = require('http');
 
-var static = require('node-static');
+var rstatic = require('node-static');
  
-var fileServer = new static.Server('/root');
+var fileServer = new rstatic.Server('/root');
 /**
  * Global variables
  */
